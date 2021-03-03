@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import CorEdit from './components/cor/cor-edit';
+import CorList from './components/cor/cor-list';
 
 function App() {
   var mensagens = "";
@@ -9,7 +10,8 @@ function App() {
   }
   return (
     <div>
-      <CorEdit></CorEdit>
+      {/* <CorEdit></CorEdit> */}
+      <CorList></CorList>
     </div>
   );
 }
