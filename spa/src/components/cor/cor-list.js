@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from "react-router-dom";
+
 
 const CorList = () => {
     const [cores, setCores] = useState([]);
@@ -18,7 +20,6 @@ const CorList = () => {
             return;
         }  
         const response = await axios.delete(`/api/cores/${id}`);
-        alert(`Cor ${id} excluída!`);
         getCoresFromServer();
     }
 
@@ -29,7 +30,12 @@ const CorList = () => {
                 <td>{elemento.id}</td>
                 <td>{elemento.sigla}</td>
                 <td>{elemento.nome}</td>
-                <td><button onClick={() => deleteCorFromServer(elemento.id)}>Excluir</button></td>
+                <td>
+                    <button onClick={() => deleteCorFromServer(elemento.id)}>Excluir</button>
+                    <Link to={`/cores/editar/${elemento.id}`}>
+                        <button>Editar</button>
+                    </Link>
+                </td>
             </tr>
         );
     });
@@ -38,6 +44,9 @@ const CorList = () => {
         <div>
             <h2>Listagem de Cores</h2>
             <hr></hr>
+            <Link to="/cores/editar">
+                <button type="submit">Nova Cor</button>
+            </Link>
             <table>
                 <thead>
                     <tr>
