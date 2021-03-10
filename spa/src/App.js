@@ -4,6 +4,8 @@ import CorEdit from './components/cor/cor-edit';
 import CorList from './components/cor/cor-list';
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ProdutoList from './components/produto/produto-list';
+import ProdutoEdit from './components/produto/produto-edit';
 
 
 function App() {
@@ -23,6 +25,15 @@ function App() {
           </Route>
           <Route path="/cores/editar/:idParaEditar">
             <CorEdit></CorEdit>
+          </Route>
+          <Route exact path="/produtos">
+            <ProdutoList></ProdutoList>
+          </Route>
+          <Route exact path="/produtos/editar">
+            <ProdutoEdit></ProdutoEdit>
+          </Route>
+          <Route path="/produtos/editar/:idParaEditar">
+            <ProdutoEdit></ProdutoEdit>
           </Route>
         </Switch>
       </Router>
