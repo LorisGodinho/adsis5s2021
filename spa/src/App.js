@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ProdutoList from './components/produto/produto-list';
 import ProdutoEdit from './components/produto/produto-edit';
-
+import LandingPage from './components/landing/landing-page';
 
 function App() {
   var mensagens = "";
@@ -17,10 +17,13 @@ function App() {
     <div>
       <Router>
         <Switch>
+          <Route exact path="/">
+            <LandingPage></LandingPage>
+          </Route>
           <Route exact path="/cores">
             <CorList></CorList>
           </Route>
-          <Route exact path="/cores/editar">
+          <Route exact path="/cores/incluir">
             <CorEdit></CorEdit>
           </Route>
           <Route path="/cores/editar/:idParaEditar">
@@ -29,7 +32,7 @@ function App() {
           <Route exact path="/produtos">
             <ProdutoList></ProdutoList>
           </Route>
-          <Route exact path="/produtos/editar">
+          <Route exact path="/produtos/incluir">
             <ProdutoEdit></ProdutoEdit>
           </Route>
           <Route path="/produtos/editar/:idParaEditar">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 
 
 const CorEdit = () => {
@@ -65,6 +65,7 @@ const CorEdit = () => {
                 </div>
 
                 <button type="submit">Enviar</button>
+                <Link to="/cores">Voltar</Link>
             </form>
         </div>
     );
