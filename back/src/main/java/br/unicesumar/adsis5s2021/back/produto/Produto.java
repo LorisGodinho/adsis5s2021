@@ -7,7 +7,9 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import br.unicesumar.adsis5s2021.back.cor.Cor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,5 +33,18 @@ public class Produto {
     @Setter
     @Column(precision = 15, scale = 2)
     private BigDecimal precoUnitario;    
+
+    @Getter
+    @Setter
+    @ManyToOne
+    private Cor corPadrao;
+
+
+    public Produto(String descricao, LocalDate lancadoEm, BigDecimal precoUnitario) {        
+        this.descricao = descricao;
+        this.lancadoEm = lancadoEm;
+        this.precoUnitario = precoUnitario;
+    }
+
     
 }

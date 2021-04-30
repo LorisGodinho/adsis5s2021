@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import CorEdit from './components/cor/cor-edit';
 import CorList from './components/cor/cor-list';
 import ReactDOM from "react-dom";
@@ -7,6 +8,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ProdutoList from './components/produto/produto-list';
 import ProdutoEdit from './components/produto/produto-edit';
 import LandingPage from './components/landing/landing-page';
+import ManterProduto2 from './components/produto2/manter-produto2';
+import TesteArthur from './components/testeArthur/teste-arthur';
 
 function App() {
   var mensagens = "";
@@ -29,15 +32,18 @@ function App() {
           <Route path="/cores/editar/:idParaEditar">
             <CorEdit></CorEdit>
           </Route>
-          <Route exact path="/produtos">
-            <ProdutoList></ProdutoList>
+
+          <Route exact path="/produtos" component={ProdutoList}></Route>
+          <Route path="/produtos/incluir" component={ProdutoEdit}></Route>
+          <Route path="/produtos/editar/:idParaEditar" component={ProdutoEdit}></Route>
+
+          <Route path="/produtos2" component={ManterProduto2}></Route>
+
+          <Route exact path="/teste-arthur">
+            <TesteArthur dataAtual={new Date()}></TesteArthur>
           </Route>
-          <Route exact path="/produtos/incluir">
-            <ProdutoEdit></ProdutoEdit>
-          </Route>
-          <Route path="/produtos/editar/:idParaEditar">
-            <ProdutoEdit></ProdutoEdit>
-          </Route>
+
+
         </Switch>
       </Router>
     </div>

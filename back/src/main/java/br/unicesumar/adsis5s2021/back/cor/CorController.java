@@ -1,9 +1,8 @@
 package br.unicesumar.adsis5s2021.back.cor;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,52 +10,39 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/cores")
-// @RequestMapping("/api/mycores")
 public class CorController {
-    private List<Cor> cores = new ArrayList<>();
-
-
-    public CorController() {
-        cores.add(new Cor("RX", "Roxo"));
-        cores.add(new Cor("MRL", "Amarelo"));
-    }
-  
+    @Autowired
+    private CorService service;
+ 
     @DeleteMapping("/{id}") 
     public void delete(@PathVariable("id") String id) {
-        cores = cores.stream().filter(c -> !c.getId().equals(id)).collect(Collectors.toList());
+        service.excluirPeloId(id);
     }
   
     @PutMapping("/{id}")
-    public void post(@PathVariable("id") String id, @RequestBody Cor corEditada) {
-        cores = cores.stream().filter(c -> !c.getId().equals(id)).collect(Collectors.toList());
-        cores.add(corEditada);
+    public void put(@PathVariable("id") String id, @RequestBody Cor corEditada) {
+        service.salvar(corEditada);
     }
 
 
     @GetMapping("/{id}")
     public Cor getById(@PathVariable("id") String id) {
-        return cores.stream()
-            .filter(c -> c.getId().equals(id))
-            .findFirst()
-            .orElseGet(Cor::new);
+        return service.obterPeloId(id);
     }
 
     @GetMapping
-    public List<Cor> get() {
-        return cores;
+    public Page<Cor> get(Pageable p, @RequestParam(name = "termoDePesquisa", required = false) String termoDePesquisa) {
+        return service.obterTodosPaginando(p, termoDePesquisa);
     }
 
     @PostMapping
     public String post(@RequestBody Cor nova) {
-        System.out.println("Post: " 
-            + " " + nova.getId() 
-            + " " + nova.getNome() 
-            + " " + nova.getSigla());
-        this.cores.add(nova);
+        service.salvar(nova);
         return nova.getId();
     }
 
